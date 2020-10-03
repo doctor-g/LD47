@@ -1,11 +1,9 @@
 extends Area2D
 
 export var MAX_SPEED := 2.5
-export var ACCELERATION := 0.25
 
 signal destroyed
 
-var _speed := 0.0
 var _radius := 320.0
 var _angle := TAU / 4
 
@@ -24,18 +22,28 @@ func _set_position_and_rotation()->void:
 	
 
 func _physics_process(delta):
-	var direction := 0
-	if Input.is_action_pressed("move_clockwise"):
-		direction += 1
-	if Input.is_action_pressed("move_counterclockwise"):
-		direction -= 1
+	var target_vector := Vector2.ZERO
+	var is_input := false
+	if Input.is_action_pressed("move_up"):
+		target_vector.y -= 1
+		is_input = true
+	if Input.is_action_pressed("move_down"):
+		target_vector.y += 1
+		is_input = true		
+	if Input.is_action_pressed("move_left"):
+		target_vector.x -= 1
+		is_input = true		
+	if Input.is_action_pressed("move_right"):
+		target_vector.x += 1
+		is_input = true		
+		
+	var target_angle = target_vector.angle()
 	
-	if direction == 0:
-		_speed *= ACCELERATION
-	else:
-		_speed = clamp(_speed + ACCELERATION * direction, -MAX_SPEED, MAX_SPEED)	
-	_angle += _speed * delta
-	
+	if is_input:
+		var diff := fmod(target_angle - _angle, TAU)
+		var shortest := fmod(2*diff, TAU) - diff
+		_angle += min(abs(shortest), MAX_SPEED*delta) * sign(shortest)
+		
 	_set_position_and_rotation()
 	
 	if Input.is_action_just_pressed("fire"):
