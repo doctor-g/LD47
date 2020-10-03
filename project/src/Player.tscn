@@ -17,4 +17,7 @@ polygon = PoolVector2Array( -0.356884, -6.69618, -7.62051, 5.33244, 6.50764, 5.3
 
 [node name="FireSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+
+[node name="FireCooldown" type="Timer" parent="."]
 [connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
+[connection signal="timeout" from="FireCooldown" to="." method="_on_FireCooldown_timeout"]
