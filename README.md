@@ -1,4 +1,9 @@
-# Ludum Dare 47
+# Orbital Blast
+
+A simple shmup made in [Godot Engine](https://godotengine.org/) for 
+[Ludum Dare 47](https://ldjam.com/events/ludum-dare/47).
+
+[Play online now!](https://doctor-g.github.io/LD47)
 
 ## Palette
 
