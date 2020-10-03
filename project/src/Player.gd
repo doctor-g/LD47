@@ -13,6 +13,16 @@ onready var _Bullet := preload("res://src/PlayerBullet.tscn")
 onready var _Explosion := preload("res://src/Explosion.tscn")
 onready var _shoot_sfx : AudioStreamPlayer = $FireSFX
 
+
+func _ready():
+	_set_position_and_rotation()
+	
+	
+func _set_position_and_rotation()->void:
+	position = Vector2(cos(_angle) * _radius, sin(_angle) * _radius)
+	rotation = _angle - PI / 2
+	
+
 func _physics_process(delta):
 	var direction := 0
 	if Input.is_action_pressed("move_clockwise"):
@@ -26,8 +36,7 @@ func _physics_process(delta):
 		_speed = clamp(_speed + ACCELERATION * direction, -MAX_SPEED, MAX_SPEED)	
 	_angle += _speed * delta
 	
-	position = Vector2(cos(_angle) * _radius, sin(_angle) * _radius)
-	rotation = _angle - PI / 2
+	_set_position_and_rotation()
 	
 	if Input.is_action_just_pressed("fire"):
 		_shoot_sfx.play()

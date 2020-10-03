@@ -1,16 +1,23 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/Level.gd" type="Script" id=1]
-[ext_resource path="res://src/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/background_color.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/fonts/Heading1.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/fonts/arcade_future.otf" type="DynamicFontData" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 4 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="DynamicFont" id=3]
+size = 92
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=7]
 resource_name = "GameOverFadeIn"
 tracks/0/type = "value"
 tracks/0/path = NodePath("GameOverControl:modulate")
@@ -20,12 +27,40 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1.8025 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("GameOverControl:visible")
+tracks/1/path = NodePath("GameOverControl/MainMenuButton:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "GameOverFadeOut"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameOverControl:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GameOverControl/MainMenuButton:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -35,6 +70,45 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MainMenuControl:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ScoreLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "MenuFadeOut"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainMenuControl:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [node name="Level" type="Node2D"]
@@ -57,9 +131,6 @@ radial_accel = 100.0
 radial_accel_random = 1.0
 hue_variation = 0.1
 hue_variation_random = 1.0
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, 280.183 )
 
 [node name="Aliens" type="Node2D" parent="."]
 
@@ -88,10 +159,8 @@ margin_bottom = 94.0
 custom_fonts/font = SubResource( 1 )
 text = "Main Menu"
 
-[node name="GameOverFadeIn" type="AnimationPlayer" parent="."]
-anims/GameOverFadeIn = SubResource( 2 )
-
 [node name="ScoreLabel" type="Label" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -20.0
@@ -104,5 +173,37 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="destroyed" from="Player" to="." method="_on_Player_destroyed"]
+
+[node name="MainMenuControl" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -215.5
+margin_top = -48.5
+margin_right = 215.5
+margin_bottom = 48.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLabel" type="Label" parent="MainMenuControl"]
+margin_right = 431.0
+margin_bottom = 97.0
+custom_fonts/font = SubResource( 3 )
+text = "Orbital Blast"
+
+[node name="SpaceToBegin" type="Label" parent="MainMenuControl"]
+margin_top = 101.0
+margin_right = 431.0
+margin_bottom = 117.0
+custom_fonts/font = SubResource( 4 )
+text = "Press Space to Begin"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/GameOverFadeIn = SubResource( 7 )
+anims/GameOverFadeOut = SubResource( 6 )
+anims/MenuFadeOut = SubResource( 5 )
 [connection signal="button_down" from="GameOverControl/MainMenuButton" to="." method="_on_MainMenuButton_button_down"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

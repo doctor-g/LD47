@@ -15,3 +15,4 @@ color-hex.com](https://www.color-hex.com/color-palette/25888):
 ## Third-Party Assets
 
 - [Press Start 2P Font](https://fonts.google.com/specimen/Press+Start+2P) used under OFL
+- [Arcade Future Font](https://www.dafont.com/arcade-future.font) is licensed as free for personal use
