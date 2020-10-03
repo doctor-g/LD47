@@ -36,9 +36,9 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 2.63902, 2.63902 ),
+"transitions": PoolRealArray( 2.63902, 1 ),
 "update": 0,
-"values": [ Vector2( 320, 362 ), Vector2( 320, -104.274 ) ]
+"values": [ Vector2( 144, 352.765 ), Vector2( 144, -111.28 ) ]
 }
 
 [node name="Control" type="Control"]
@@ -53,23 +53,24 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -192.0
-margin_top = -22.0
-margin_right = 192.0
-margin_bottom = 82.0002
+margin_left = -256.0
+margin_top = 352.765
+margin_right = 256.0
+margin_bottom = 456.765
 custom_constants/separation = 64
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ReadyLabel" type="Label" parent="VBoxContainer"]
-margin_right = 384.0
+margin_right = 512.0
 margin_bottom = 24.0
 custom_fonts/font = SubResource( 1 )
 text = "Ready"
@@ -77,12 +78,11 @@ align = 1
 valign = 1
 
 [node name="ClickLabel" type="Label" parent="VBoxContainer"]
-modulate = Color( 1, 1, 1, 0 )
 margin_top = 88.0
-margin_right = 384.0
+margin_right = 512.0
 margin_bottom = 104.0
 custom_fonts/font = SubResource( 2 )
-text = "Click or Tap to Continue"
+text = "Press Space to Continue"
 align = 1
 valign = 1
 __meta__ = {
