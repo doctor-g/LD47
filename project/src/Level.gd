@@ -4,10 +4,10 @@ enum State { MENU, MENU_FADE_OUT, PLAYING, GAME_OVER }
 
 var _score := 0
 var _state = State.MENU
+var _wave
 
-onready var _Alien := preload("res://src/Alien.tscn")
 onready var _Player := preload("res://src/Player.tscn")
-onready var _aliens := $Aliens
+onready var _Wave := preload("res://src/Wave.tscn")
 onready var _animation_player := $AnimationPlayer
 onready var _score_label : Label = $ScoreLabel
 onready var _start_sound := $StartSound
@@ -29,9 +29,9 @@ func _on_Player_destroyed() ->void:
 
 func _on_MainMenuButton_button_down() ->void :
 	_start_sound.play()
-	for alien in _aliens.get_children():
-		_aliens.remove_child(alien)
-		alien.queue_free()
+	_wave.clear()
+	remove_child(_wave)
+	_wave.queue_free()
 	_animation_player.play("GameOverFadeOut")
 
 
@@ -50,12 +50,9 @@ func _start_game() -> void:
 	var player := _Player.instance()
 	var _ignored = player.connect("destroyed", self, "_on_Player_destroyed", [], CONNECT_ONESHOT)
 	add_child(player)
-	
-	for i in range(0,5):
-		var alien = _Alien.instance()
-		alien.rotate(TAU * i / 5)
-		alien.connect("destroyed", self, "_on_Alien_destroyed", [], CONNECT_ONESHOT)
-		_aliens.add_child(alien)
+	_wave = _Wave.instance()
+	_ignored = _wave.connect("alien_destroyed", self, "_on_Alien_destroyed", [])
+	add_child(_wave)
 
 
 func _on_FullScreenCheck_pressed():
