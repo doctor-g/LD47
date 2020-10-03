@@ -16,6 +16,7 @@ onready var _start_sound := $StartSound
 func _ready() -> void:
 	$MainMenuControl/PlayButton.grab_focus()
 
+
 func _on_Alien_destroyed() -> void:
 	_score += 10
 	_update_score_label()
@@ -54,7 +55,19 @@ func _start_game() -> void:
 	var _ignored = player.connect("destroyed", self, "_on_Player_destroyed", [], CONNECT_ONESHOT)
 	add_child(player)
 	_wave = _Wave.instance()
-	_ignored = _wave.connect("alien_destroyed", self, "_on_Alien_destroyed", [])
+	_ignored = _wave.connect("alien_destroyed", self, "_on_Alien_destroyed")
+	_ignored = _wave.connect("complete", self, "_on_Wave_complete")
+	add_child(_wave)
+
+
+func _on_Wave_complete() -> void:
+	yield(get_tree().create_timer(1.0), "timeout")
+	var level = _wave.level
+	remove_child(_wave)
+	_wave = _Wave.instance()
+	_wave.level = level + 1
+	var _ignored = _wave.connect("alien_destroyed", self, "_on_Alien_destroyed")
+	_ignored = _wave.connect("complete", self, "_on_Wave_complete")
 	add_child(_wave)
 
 

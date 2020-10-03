@@ -1,15 +1,21 @@
 extends Node2D
 
 signal alien_destroyed
+signal complete
+
+var level := 1
+
+var _count : int
 
 onready var _Alien := preload("res://src/Alien.tscn")
 onready var _aliens := $Aliens
 
 
 func _ready():
-	for i in range(0,5):
+	_count = level + 2
+	for i in range(0,_count):
 		var alien = _Alien.instance()
-		alien.rotate(TAU * i / 5)
+		alien.rotate(TAU * i / _count)
 		alien.connect("destroyed", self, "_on_Alien_destroyed", [], CONNECT_ONESHOT)
 		_aliens.add_child(alien)
 
@@ -21,5 +27,11 @@ func clear():
 		alien.queue_free()
 
 
-func _on_Alien_destroyed() -> void:
+func _on_Alien_destroyed(alien:Alien) -> void:
+	_aliens.remove_child(alien)
+	_count-=1
 	emit_signal("alien_destroyed")
+	if _count == 0:
+		emit_signal("complete")
+		print("Complete!")
+	

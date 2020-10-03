@@ -9,7 +9,7 @@
 size = 24
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "ClickLabelFadeIn"
 length = 3.0
 tracks/0/type = "value"
@@ -25,7 +25,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "ScrollAway"
 tracks/0/type = "value"
 tracks/0/path = NodePath("VBoxContainer:rect_position")
@@ -90,8 +90,8 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "ClickLabelFadeIn"
-anims/ClickLabelFadeIn = SubResource( 3 )
-anims/ScrollAway = SubResource( 4 )
+anims/ClickLabelFadeIn = SubResource( 2 )
+anims/ScrollAway = SubResource( 3 )
 
 [node name="StartSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
