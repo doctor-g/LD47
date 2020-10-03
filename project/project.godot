@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="StuckInALoop"
-run/main_scene="res://src/Level.tscn"
+run/main_scene="res://src/SplashScreen.tscn"
 config/icon="res://icon.png"
 
 [display]
