@@ -9,6 +9,7 @@ var _angle := TAU / 4
 
 onready var _Bullet := preload("res://src/PlayerBullet.tscn")
 onready var _Explosion := preload("res://src/Explosion.tscn")
+onready var _shoot_sfx : AudioStreamPlayer = $FireSFX
 
 func _physics_process(delta):
 	var direction := 0
@@ -27,6 +28,7 @@ func _physics_process(delta):
 	rotation = _angle - PI / 2
 	
 	if Input.is_action_just_pressed("fire"):
+		_shoot_sfx.play()
 		var bullet := _Bullet.instance()
 		bullet.position = position
 		bullet.rotation = rotation

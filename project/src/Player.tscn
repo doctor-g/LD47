@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/ship.png" type="Texture" id=1]
 [ext_resource path="res://src/Player.gd" type="Script" id=2]
+[ext_resource path="res://assets/sfx/shoot.wav" type="AudioStream" id=3]
 
 [node name="Player" type="Area2D"]
 script = ExtResource( 2 )
@@ -13,4 +14,7 @@ texture = ExtResource( 1 )
 position = Vector2( 1.11451, 1.8596 )
 scale = Vector2( 2.32981, 2.54962 )
 polygon = PoolVector2Array( -0.356884, -6.69618, -7.62051, 5.33244, 6.50764, 5.33244 )
+
+[node name="FireSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 [connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
