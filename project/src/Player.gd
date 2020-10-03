@@ -6,7 +6,7 @@ var _radius := 320.0
 var _angle := TAU / 4
 
 onready var _Bullet := preload("res://src/PlayerBullet.tscn")
-
+onready var _Explosion := preload("res://src/Explosion.tscn")
 
 func _process(delta):
 	var direction := 0
@@ -29,5 +29,7 @@ func _process(delta):
 
 func _on_Player_area_entered(area):
 	if area is Alien:
-		print('Death!')
+		var explosion = _Explosion.instance()
+		explosion.position = position
+		get_parent().add_child(explosion)
 		queue_free()
