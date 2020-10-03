@@ -11,6 +11,7 @@ func _input(event):
 		if event is InputEventMouseButton or event.is_action("fire"):
 			_pressed = true
 			animation_player.play("ScrollAway")
+			$StartSound.play()
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

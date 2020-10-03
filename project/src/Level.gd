@@ -10,10 +10,12 @@ onready var _Player := preload("res://src/Player.tscn")
 onready var _aliens := $Aliens
 onready var _animation_player := $AnimationPlayer
 onready var _score_label : Label = $ScoreLabel
+onready var _start_sound := $StartSound
 
 
 func _input(event):
 	if _state==State.MENU and event.is_action("fire"):
+		_start_sound.play()	
 		_state = State.MENU_FADE_OUT
 		_animation_player.play("MenuFadeOut")
 
@@ -33,6 +35,7 @@ func _on_Player_destroyed() ->void:
 
 
 func _on_MainMenuButton_button_down() ->void :
+	_start_sound.play()
 	for alien in _aliens.get_children():
 		_aliens.remove_child(alien)
 		alien.queue_free()
