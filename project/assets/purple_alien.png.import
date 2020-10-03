@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/smiley.png-c28f0805d6bd129ee3ffd78f915fea4d.stex"
+path="res://.import/purple_alien.png-5cefdab2e7c0518c1334b8e7a5181823.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/smiley.png"
-dest_files=[ "res://.import/smiley.png-c28f0805d6bd129ee3ffd78f915fea4d.stex" ]
+source_file="res://assets/purple_alien.png"
+dest_files=[ "res://.import/purple_alien.png-5cefdab2e7c0518c1334b8e7a5181823.stex" ]
 
 [params]
 
