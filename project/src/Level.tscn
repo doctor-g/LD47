@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/Level.gd" type="Script" id=1]
 [ext_resource path="res://assets/sfx/start.wav" type="AudioStream" id=2]
@@ -23,6 +23,23 @@ size = 24
 extra_spacing_top = 12
 extra_spacing_bottom = 12
 font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "TitleAnimation"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("TitleLabel:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.168627, 0.819608, 0.988235, 1 ), Color( 0.952941, 0.917647, 0.372549, 1 ), Color( 1, 0.282353, 0.768627, 1 ), Color( 0.168627, 0.819608, 0.988235, 1 ) ]
+}
 
 [sub_resource type="Animation" id=4]
 tracks/0/type = "value"
@@ -315,6 +332,7 @@ __meta__ = {
 }
 
 [node name="TitleLabel" type="Label" parent="MainMenuControl"]
+self_modulate = Color( 0.974988, 0.620013, 0.558111, 1 )
 margin_right = 596.0
 margin_bottom = 183.0
 custom_fonts/font = SubResource( 2 )
@@ -356,6 +374,10 @@ text = "Play"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TitleAnimator" type="AnimationPlayer" parent="MainMenuControl"]
+autoplay = "TitleAnimation"
+anims/TitleAnimation = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/GameOverFadeIn = SubResource( 4 )
