@@ -13,13 +13,6 @@ onready var _score_label : Label = $ScoreLabel
 onready var _start_sound := $StartSound
 
 
-func _input(event):
-	if _state==State.MENU and event.is_action("fire"):
-		_start_sound.play()	
-		_state = State.MENU_FADE_OUT
-		_animation_player.play("MenuFadeOut")
-
-
 func _on_Alien_destroyed() -> void:
 	_score += 10
 	_update_score_label()
@@ -67,3 +60,14 @@ func _start_game() -> void:
 
 func _on_FullScreenCheck_pressed():
 	OS.window_fullscreen = not OS.window_fullscreen
+
+
+func _on_MuteCheck_pressed():
+	var music_bus = AudioServer.get_bus_index("Music")
+	AudioServer.set_bus_mute(music_bus, not AudioServer.is_bus_mute(music_bus))
+
+
+func _on_PlayButton_pressed():
+	_start_sound.play()	
+	_state = State.MENU_FADE_OUT
+	_animation_player.play("MenuFadeOut")

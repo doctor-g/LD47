@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/Level.gd" type="Script" id=1]
 [ext_resource path="res://assets/sfx/start.wav" type="AudioStream" id=2]
@@ -16,9 +16,6 @@ font_data = ExtResource( 4 )
 [sub_resource type="DynamicFont" id=3]
 size = 92
 font_data = ExtResource( 6 )
-
-[sub_resource type="DynamicFont" id=4]
-font_data = ExtResource( 4 )
 
 [sub_resource type="Animation" id=7]
 resource_name = "GameOverFadeIn"
@@ -45,6 +42,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GameOverControl:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -87,16 +96,64 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("ScoreLabel:modulate")
+tracks/3/path = NodePath("MainMenuControl/PlayButton:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"update": 0,
-"values": [  ]
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("GameOverControl:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("MainMenuControl:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("MainMenuControl/FullScreenCheck:disabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("MainMenuControl/MuteCheck:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -112,6 +169,54 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MainMenuControl/PlayButton:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MainMenuControl:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MainMenuControl/FullScreenCheck:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("MainMenuControl/MuteCheck:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [node name="Level" type="Node2D"]
@@ -138,6 +243,7 @@ hue_variation_random = 1.0
 [node name="Aliens" type="Node2D" parent="."]
 
 [node name="GameOverControl" type="VBoxContainer" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
@@ -160,6 +266,7 @@ margin_top = 64.0
 margin_right = 288.0
 margin_bottom = 94.0
 custom_fonts/font = SubResource( 1 )
+disabled = true
 text = "Main Menu"
 
 [node name="ScoreLabel" type="Label" parent="."]
@@ -208,13 +315,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpaceToBegin" type="Label" parent="MainMenuControl"]
+[node name="MuteCheck" type="CheckButton" parent="MainMenuControl"]
+margin_left = 95.0
 margin_top = 145.0
+margin_right = 335.0
+margin_bottom = 185.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 8 )
+text = "Mute Music"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="MainMenuControl"]
+margin_top = 189.0
 margin_right = 431.0
-margin_bottom = 161.0
-custom_fonts/font = SubResource( 4 )
-text = "Press Space to Begin"
-align = 1
+margin_bottom = 211.0
+custom_fonts/font = ExtResource( 8 )
+text = "Play"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/GameOverFadeIn = SubResource( 7 )
@@ -227,6 +345,9 @@ stream = ExtResource( 2 )
 [node name="Jukebox" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 autoplay = true
+bus = "Music"
 [connection signal="button_down" from="GameOverControl/MainMenuButton" to="." method="_on_MainMenuButton_button_down"]
 [connection signal="pressed" from="MainMenuControl/FullScreenCheck" to="." method="_on_FullScreenCheck_pressed"]
+[connection signal="pressed" from="MainMenuControl/MuteCheck" to="." method="_on_MuteCheck_pressed"]
+[connection signal="pressed" from="MainMenuControl/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
