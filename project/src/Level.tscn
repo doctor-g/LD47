@@ -1,8 +1,44 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Level.gd" type="Script" id=1]
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/background_color.png" type="Texture" id=3]
+[ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "GameOverFadeIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameOverControl:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1.8025 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GameOverControl:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
@@ -30,3 +66,33 @@ hue_variation_random = 1.0
 position = Vector2( 0, 280.183 )
 
 [node name="Aliens" type="Node2D" parent="."]
+
+[node name="GameOverControl" type="VBoxContainer" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+custom_constants/separation = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GameOverControl"]
+margin_right = 288.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 1 )
+text = "Game Over"
+
+[node name="MainMenuButton" type="Button" parent="GameOverControl"]
+margin_top = 64.0
+margin_right = 288.0
+margin_bottom = 94.0
+custom_fonts/font = SubResource( 2 )
+text = "Main Menu"
+
+[node name="GameOverFadeIn" type="AnimationPlayer" parent="."]
+anims/GameOverFadeIn = SubResource( 3 )
+[connection signal="destroyed" from="Player" to="." method="_on_Player_destroyed"]
+[connection signal="button_down" from="GameOverControl/MainMenuButton" to="." method="_on_MainMenuButton_button_down"]

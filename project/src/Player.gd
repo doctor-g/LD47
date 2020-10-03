@@ -3,6 +3,8 @@ extends Area2D
 export var MAX_SPEED := 2.5
 export var ACCELERATION := 0.25
 
+signal destroyed
+
 var _speed := 0.0
 var _radius := 320.0
 var _angle := TAU / 4
@@ -41,4 +43,5 @@ func _on_Player_area_entered(area):
 		var explosion = _Explosion.instance()
 		explosion.position = position
 		get_parent().add_child(explosion)
+		emit_signal("destroyed")
 		queue_free()
