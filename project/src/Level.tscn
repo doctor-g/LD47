@@ -4,10 +4,7 @@
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/background_color.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=4]
-
-[sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 4 )
+[ext_resource path="res://assets/fonts/Heading1.tres" type="DynamicFont" id=5]
 
 [sub_resource type="DynamicFont" id=2]
 size = 24
@@ -78,10 +75,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GameOverControl"]
+[node name="GameOverLabel" type="Label" parent="GameOverControl"]
 margin_right = 288.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = ExtResource( 5 )
 text = "Game Over"
 
 [node name="MainMenuButton" type="Button" parent="GameOverControl"]
@@ -93,5 +90,38 @@ text = "Main Menu"
 
 [node name="GameOverFadeIn" type="AnimationPlayer" parent="."]
 anims/GameOverFadeIn = SubResource( 3 )
+
+[node name="LeftBox" type="ColorRect" parent="."]
+margin_left = -512.0
+margin_top = -384.0
+margin_right = -384.0
+margin_bottom = 384.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightBox" type="ColorRect" parent="."]
+anchor_bottom = 1.0
+margin_left = 384.0
+margin_top = -384.0
+margin_right = 512.0
+margin_bottom = 384.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_left = -7.55099
+margin_top = -377.55
+margin_right = 32.449
+margin_bottom = -345.55
+custom_fonts/font = ExtResource( 5 )
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="destroyed" from="Player" to="." method="_on_Player_destroyed"]
 [connection signal="button_down" from="GameOverControl/MainMenuButton" to="." method="_on_MainMenuButton_button_down"]

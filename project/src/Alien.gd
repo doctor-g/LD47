@@ -1,6 +1,8 @@
 class_name Alien
 extends Area2D
 
+signal destroyed
+
 export var speed := 40.0
 export var rotation_speed := 5.0
 
@@ -15,4 +17,5 @@ func damage():
 	var explosion := Explosion.instance()
 	explosion.position = position
 	get_parent().add_child(explosion)
+	emit_signal("destroyed")
 	queue_free()
