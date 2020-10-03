@@ -63,4 +63,7 @@ func _start_game() -> void:
 		alien.rotate(TAU * i / 5)
 		alien.connect("destroyed", self, "_on_Alien_destroyed", [], CONNECT_ONESHOT)
 		_aliens.add_child(alien)
-		
+
+
+func _on_FullScreenCheck_pressed():
+	OS.window_fullscreen = not OS.window_fullscreen

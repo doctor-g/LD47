@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/Level.gd" type="Script" id=1]
 [ext_resource path="res://assets/sfx/start.wav" type="AudioStream" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/fonts/Heading1.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/fonts/arcade_future.otf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/music/menu.ogg" type="AudioStream" id=7]
+[ext_resource path="res://assets/fonts/Regular.tres" type="DynamicFont" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -195,10 +196,22 @@ margin_bottom = 97.0
 custom_fonts/font = SubResource( 3 )
 text = "Orbital Blast"
 
-[node name="SpaceToBegin" type="Label" parent="MainMenuControl"]
+[node name="FullScreenCheck" type="CheckButton" parent="MainMenuControl"]
+margin_left = 95.0
 margin_top = 101.0
+margin_right = 335.0
+margin_bottom = 141.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 8 )
+text = "Fullscreen"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpaceToBegin" type="Label" parent="MainMenuControl"]
+margin_top = 145.0
 margin_right = 431.0
-margin_bottom = 117.0
+margin_bottom = 161.0
 custom_fonts/font = SubResource( 4 )
 text = "Press Space to Begin"
 align = 1
@@ -215,4 +228,5 @@ stream = ExtResource( 2 )
 stream = ExtResource( 7 )
 autoplay = true
 [connection signal="button_down" from="GameOverControl/MainMenuButton" to="." method="_on_MainMenuButton_button_down"]
+[connection signal="pressed" from="MainMenuControl/FullScreenCheck" to="." method="_on_FullScreenCheck_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
