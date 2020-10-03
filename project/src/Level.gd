@@ -13,6 +13,9 @@ onready var _score_label : Label = $ScoreLabel
 onready var _start_sound := $StartSound
 
 
+func _ready() -> void:
+	$MainMenuControl/PlayButton.grab_focus()
+
 func _on_Alien_destroyed() -> void:
 	_score += 10
 	_update_score_label()

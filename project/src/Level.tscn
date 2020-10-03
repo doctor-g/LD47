@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/Level.gd" type="Script" id=1]
 [ext_resource path="res://assets/sfx/start.wav" type="AudioStream" id=2]
@@ -16,6 +16,12 @@ font_data = ExtResource( 4 )
 [sub_resource type="DynamicFont" id=2]
 size = 92
 font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+extra_spacing_top = 12
+extra_spacing_bottom = 12
+font_data = ExtResource( 4 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "GameOverFadeIn"
@@ -155,6 +161,20 @@ tracks/7/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/8/type = "method"
+tracks/8/path = NodePath("MainMenuControl/PlayButton")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "grab_focus"
+} ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "MenuFadeOut"
@@ -244,7 +264,6 @@ hue_variation_random = 1.0
 
 [node name="GameOverControl" type="VBoxContainer" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -330,8 +349,8 @@ __meta__ = {
 [node name="PlayButton" type="Button" parent="MainMenuControl"]
 margin_top = 189.0
 margin_right = 431.0
-margin_bottom = 211.0
-custom_fonts/font = ExtResource( 8 )
+margin_bottom = 251.0
+custom_fonts/font = SubResource( 6 )
 text = "Play"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
