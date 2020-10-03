@@ -17,14 +17,13 @@ font_data = ExtResource( 4 )
 size = 92
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 extra_spacing_top = 12
 extra_spacing_bottom = 12
 font_data = ExtResource( 4 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "GameOverFadeIn"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("GameOverControl:modulate")
 tracks/0/interp = 1
@@ -62,8 +61,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "GameOverFadeOut"
+[sub_resource type="Animation" id=5]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("GameOverControl:modulate")
@@ -176,8 +174,7 @@ tracks/8/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "MenuFadeOut"
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("MainMenuControl:modulate")
 tracks/0/interp = 1
@@ -350,13 +347,13 @@ __meta__ = {
 margin_top = 189.0
 margin_right = 431.0
 margin_bottom = 251.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 3 )
 text = "Play"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/GameOverFadeIn = SubResource( 3 )
-anims/GameOverFadeOut = SubResource( 4 )
-anims/MenuFadeOut = SubResource( 5 )
+anims/GameOverFadeIn = SubResource( 4 )
+anims/GameOverFadeOut = SubResource( 5 )
+anims/MenuFadeOut = SubResource( 6 )
 
 [node name="StartSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )

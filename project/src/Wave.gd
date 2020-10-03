@@ -1,6 +1,7 @@
 extends Node2D
 
 signal alien_destroyed
+signal alien_escaped
 signal complete
 
 var level := 1
@@ -17,6 +18,7 @@ func _ready():
 		var alien = _Alien.instance()
 		alien.rotate(TAU * i / _count)
 		alien.connect("destroyed", self, "_on_Alien_destroyed", [], CONNECT_ONESHOT)
+		alien.connect("escaped", self, "_on_Alien_escaped", [], CONNECT_ONESHOT)
 		_aliens.add_child(alien)
 
 
@@ -33,5 +35,10 @@ func _on_Alien_destroyed(alien:Alien) -> void:
 	emit_signal("alien_destroyed")
 	if _count == 0:
 		emit_signal("complete")
-		print("Complete!")
 	
+	
+func _on_Alien_escaped(_alien:Alien) -> void:
+	_count -= 1
+	emit_signal("alien_escaped")
+	if _count == 0:
+		emit_signal("complete")

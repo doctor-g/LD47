@@ -5,6 +5,8 @@ signal destroyed
 export var MAX_SPEED := 2.5
 export var FIRE_COOLDOWN := 0.35
 
+var enabled := true
+
 var _radius := 320.0
 var _angle := TAU / 4
 var _touch_input := false
@@ -40,6 +42,9 @@ func _input(event):
 		
 
 func _physics_process(delta):
+	if not enabled:
+		return
+	
 	var is_key_input := false
 	
 	if not _touch_input:
