@@ -5,7 +5,7 @@ signal destroyed
 export var MAX_SPEED := 2.5
 export var FIRE_COOLDOWN := 0.35
 
-var enabled := true
+var enabled := true setget _set_enabled
 
 var _radius := 320.0
 var _angle := TAU / 4
@@ -17,6 +17,7 @@ onready var _Bullet := preload("res://src/PlayerBullet.tscn")
 onready var _Explosion := preload("res://src/Explosion.tscn")
 onready var _shoot_sfx : AudioStreamPlayer = $FireSFX
 onready var _fire_cooldown : Timer = $FireCooldown
+onready var _sprite := $AnimatedSprite
 
 
 func _ready():
@@ -69,6 +70,11 @@ func _physics_process(delta):
 		var diff := fmod(_target_angle - _angle, TAU)
 		var shortest := fmod(2*diff, TAU) - diff
 		_angle += min(abs(shortest), MAX_SPEED*delta) * sign(shortest)
+		_sprite.scale.x = 1 if sign(shortest) > 0 else -1
+		_sprite.play("clockwise")
+	else:
+		_sprite.scale.x = 1
+		_sprite.play("idle")
 		
 	_set_position_and_rotation()
 	
@@ -97,3 +103,8 @@ func _on_Player_area_entered(area):
 
 func _on_FireCooldown_timeout():
 	_can_fire = true
+
+
+func _set_enabled(value):
+	enabled = value
+	_sprite.play("idle")
