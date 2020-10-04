@@ -20,7 +20,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="StuckInALoop"
+config/name="Orbital Blast"
+config/description="A simple shmup made for Ludum Dare 47"
 run/main_scene="res://src/SplashScreen.tscn"
 config/icon="res://icon.png"
 
