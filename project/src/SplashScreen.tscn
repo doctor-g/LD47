@@ -8,7 +8,7 @@
 size = 24
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "ScrollAway"
 tracks/0/type = "value"
 tracks/0/path = NodePath("VBoxContainer:rect_position")
@@ -60,7 +60,7 @@ align = 1
 valign = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/ScrollAway = SubResource( 3 )
+anims/ScrollAway = SubResource( 2 )
 
 [node name="StartSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/fonts/Heading1.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/fonts/arcade_future.otf" type="DynamicFontData" id=6]
-[ext_resource path="res://assets/music/menu.ogg" type="AudioStream" id=7]
+[ext_resource path="res://src/Jukebox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/fonts/Regular.tres" type="DynamicFont" id=8]
 
 [sub_resource type="DynamicFont" id=1]
@@ -24,7 +24,7 @@ extra_spacing_top = 12
 extra_spacing_bottom = 12
 font_data = ExtResource( 4 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=4]
 resource_name = "TitleAnimation"
 length = 3.0
 loop = true
@@ -41,7 +41,7 @@ tracks/0/keys = {
 "values": [ Color( 0.168627, 0.819608, 0.988235, 1 ), Color( 0.952941, 0.917647, 0.372549, 1 ), Color( 1, 0.282353, 0.768627, 1 ), Color( 0.168627, 0.819608, 0.988235, 1 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("GameOverControl:modulate")
 tracks/0/interp = 1
@@ -79,7 +79,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("GameOverControl:modulate")
@@ -192,7 +192,7 @@ tracks/8/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("MainMenuControl:modulate")
 tracks/0/interp = 1
@@ -377,19 +377,17 @@ __meta__ = {
 
 [node name="TitleAnimator" type="AnimationPlayer" parent="MainMenuControl"]
 autoplay = "TitleAnimation"
-anims/TitleAnimation = SubResource( 7 )
+anims/TitleAnimation = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/GameOverFadeIn = SubResource( 4 )
-anims/GameOverFadeOut = SubResource( 5 )
-anims/MenuFadeOut = SubResource( 6 )
+anims/GameOverFadeIn = SubResource( 5 )
+anims/GameOverFadeOut = SubResource( 6 )
+anims/MenuFadeOut = SubResource( 7 )
 
 [node name="StartSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 
-[node name="Jukebox" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-autoplay = true
+[node name="Jukebox" parent="." instance=ExtResource( 7 )]
 bus = "Music"
 [connection signal="button_down" from="GameOverControl/MainMenuButton" to="." method="_on_MainMenuButton_button_down"]
 [connection signal="pressed" from="MainMenuControl/FullScreenCheck" to="." method="_on_FullScreenCheck_pressed"]

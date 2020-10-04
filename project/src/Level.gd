@@ -37,6 +37,7 @@ func _on_Player_destroyed() ->void:
 
 func _on_MainMenuButton_button_down() ->void :
 	_start_sound.play()
+	$Jukebox.play_menu()
 	if _player:
 		remove_child(_player)
 		_player.queue_free()
@@ -55,6 +56,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _start_game() -> void:
+	$Jukebox.play_theme()
 	_state = State.PLAYING
 	_score = 0
 	_update_score_label()
@@ -68,7 +70,6 @@ func _start_game() -> void:
 func _start_wave(level:int):
 	if _state != State.PLAYING:
 		return
-	
 	_wave = _Wave.instance()
 	_wave.level = level
 	var _ignored = _wave.connect("alien_destroyed", self, "_on_Alien_destroyed")
@@ -98,6 +99,9 @@ func _on_PlayButton_pressed():
 
 
 func _on_Alien_escaped():
+	# First check if the game already ended because the player died.
+	if _state == State.GAME_OVER:
+		return 
 	_escapees += 1
 	if _escapees == 3:
 		_player.enabled = false
