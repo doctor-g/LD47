@@ -1,9 +1,18 @@
 # Orbital Blast
 
 A simple shmup made in [Godot Engine](https://godotengine.org/) for 
-[Ludum Dare 47](https://ldjam.com/events/ludum-dare/47).
+[Ludum Dare 47](https://ldjam.com/events/ludum-dare/47) on the shared 
+theme, &ldquo;Stuck in a loop.&rdquo;
 
 [Play online now!](https://doctor-g.github.io/LD47)
+
+See [the _Orbital Blast_ page on ldjam.com](https://ldjam.com/events/ludum-dare/47/orbital-blast) for more information about this project.
+
+## Tools
+
+- [Godot Engine 3.2.3](https://godotengine.org/)
+- [Piskel 0.14](https://www.piskelapp.com/)
+- [LMMS 1.2.1](https://lmms.io/)
 
 ## Palette
 
