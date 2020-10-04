@@ -25,6 +25,10 @@ config/description="A simple shmup made for Ludum Dare 47"
 run/main_scene="res://src/SplashScreen.tscn"
 config/icon="res://icon.png"
 
+[audio]
+
+output_latency.web=15
+
 [display]
 
 window/size/width=800
